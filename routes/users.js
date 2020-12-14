@@ -79,8 +79,8 @@ router.put('/:userId', function(req, res) {
 
 
 router.delete("/:userId", function(req, res) {
-	userService.deleteUser(req.params['userId'])
-     res.send(`deleted user with id: ${req.params['userId']}`)
+	userService.deleteUser(req.params['userId']).then(()=>
+     res.send(`deleted user with id: ${req.params['userId']}`))
 });
 
 

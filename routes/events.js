@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     eventService.getAllEvents()
         .then(events => {
             res.send(JSON.stringify(events))
-            console.log(events)
+
         })
 });
 
@@ -20,7 +20,7 @@ router.get('/:id', function(req, res, next) {
     eventService.getEventById(req.params["id"])
         .then(event=> {
             res.send(JSON.stringify(event))
-            console.log(event)
+
         })
 });
 
@@ -45,7 +45,6 @@ router.post('/:id/users', function(req, res, next) {
     userService.getAllUsers()
         .then(users => {
             let user = users.filter(u => req.body.includes(u.id))
-            console.log(user)
             res.send(JSON.stringify(user))
         })
 });

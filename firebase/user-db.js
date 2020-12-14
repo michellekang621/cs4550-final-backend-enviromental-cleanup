@@ -32,10 +32,9 @@ const updateUser = (userId, user) =>
 
 const deleteUser = (userId) => {
     db.collection("users").doc(userId).delete().then(function() {
-        console.log("Document successfully deleted!");
         return "success"
     }).catch(function(error) {
-        console.error("Error removing document: ", error);
+        return "failure"
     });
 }
 
@@ -74,8 +73,6 @@ const getUserById = (userId) => {
         .then(function(doc) {
             if (doc.exists) {
                 return {...doc.data(), id:userId}
-            } else {
-                console.log("No such document!");
             }
 })}
 
@@ -86,7 +83,7 @@ const authenticate = (email, password) =>
        db.collection("users").where("email", "==", email)
            .where("password","==", password).get()
            .then(snapshot=> ({...snapshot.docs[0].data(), id:snapshot.docs[0].id}))
-           .catch(err => {message:"no user found"})
+           .catch(err => ({message:"no user found"}))
 
 
 
